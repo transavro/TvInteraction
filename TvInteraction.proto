@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package main;
+
+service TvInteractionService {
+    rpc KeycodeAction(KeycodeReq) returns(Resp);
+    rpc GetAllApps(GetAllAppsReq) returns (GetAllAppsResp);
+    rpc AppAction(AppReq) returns (Resp);
+    rpc PlayContent(PlayReq) returns(Resp);
+    rpc GetListOfTvSources(Req) returns (TvSources);
+    rpc TvAction(TvActionReq) returns (Resp) ;
+}
+
+message Resp{};
+
+message Req{}
+
+message KeycodeReq{
+    string keycode = 1;
+}
+
+message GetAllAppsReq{}
+
+message GetAllAppsResp{
+    map<string, string> app_list = 1;
+}
+
+enum App{
+    APP_OPEN = 0;
+    APP_UNINSTALL = 1;
+}
+
+message AppReq{
+    App app = 1;
+    string package = 2;
+}
+
+
+
+message PlayReq{
+    string package = 1;
+    string deepLink = 2;
+}
+
+message TvSources{
+    repeated string tvsources = 1;
+}
+
+message TvActionReq{
+    string source = 1;
+}
